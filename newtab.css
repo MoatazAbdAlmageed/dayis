@@ -48,6 +48,14 @@ body.theme-obsidian {
   --select-option-bg: #141414;
 }
 
+body.theme-purple {
+  --bg-gradient: linear-gradient(135deg, #181423 0%, #2f2540 35%, #4a3c63 70%, #6a5b8b 100%);
+  --overlay-color-1: rgba(223, 183, 108, 0.22);
+  --overlay-color-2: rgba(74, 60, 99, 0.5);
+  --panel-bg: rgba(47, 37, 64, 0.85);
+  --select-option-bg: #2f2540;
+}
+
 * {
   margin: 0;
   padding: 0;

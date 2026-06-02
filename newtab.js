@@ -44,7 +44,7 @@ function loadConfig() {
 // Apply layout preferences dynamically based on the current configuration
 function applyUIConfig() {
   // Apply Background Theme classes
-  document.body.classList.remove('theme-emerald', 'theme-indigo', 'theme-crimson', 'theme-obsidian');
+  document.body.classList.remove('theme-emerald', 'theme-indigo', 'theme-crimson', 'theme-obsidian', 'theme-purple');
   document.body.classList.add(`theme-${config.theme}`);
 
   // Cairo location label language override

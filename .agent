@@ -38,7 +38,7 @@
 
 ## Settings Panel (preserved features)
 - Language toggle (English / Arabic+English)
-- Background theme selector (Emerald, Indigo, Crimson, Obsidian)
+- Background theme selector (Emerald, Indigo, Crimson, Obsidian, Purple)
 - Clock style selector (Analog, Digital, Both)
 - Layout density selector (Standard, Compact)
 - Todo list visibility toggle (Show/Hide) — hides only `.todo-card`, NOT the whole column
