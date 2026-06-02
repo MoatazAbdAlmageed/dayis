@@ -116,6 +116,12 @@ function applyUIConfig() {
     liveText.textContent = config.language === 'english' ? 'LIVE' : 'LIVE / مباشر';
   }
 
+  // 3-Day Forecast translation
+  const forecastTitle = document.querySelector('.forecast-title');
+  if (forecastTitle) {
+    forecastTitle.textContent = config.language === 'english' ? '3-Day Forecast' : '3-Day Forecast / توقعات ٣ أيام';
+  }
+
   // Refresh todo text/placeholders for selected language
   if (typeof renderTodos === 'function') {
     renderTodos();
@@ -511,7 +517,7 @@ function initRadio() {
 function fetchWeather() {
   const latitude = 30.0444;
   const longitude = 31.2357;
-  const url = `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current=temperature_2m,weather_code`;
+  const url = `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current=temperature_2m,weather_code&daily=weather_code,temperature_2m_max,temperature_2m_min&timezone=Africa%2FCairo`;
 
   fetch(url)
     .then(res => {
@@ -519,6 +525,7 @@ function fetchWeather() {
       return res.json();
     })
     .then(data => {
+      // 1. Render Current Weather
       if (data && data.current) {
         const temp = Math.round(data.current.temperature_2m);
         const code = data.current.weather_code;
@@ -554,6 +561,62 @@ function fetchWeather() {
         if (widgetEl) {
           const desc = config.language === 'english' ? descEn : `${descEn} / ${descAr}`;
           widgetEl.title = `${desc} - Cairo`;
+        }
+      }
+
+      // 2. Render 3-Day Forecast Box
+      if (data && data.daily) {
+        const forecastDaysContainer = document.getElementById('forecast-days');
+        if (forecastDaysContainer) {
+          forecastDaysContainer.innerHTML = '';
+          
+          // Index 1, 2, 3 correspond to Tomorrow, Day 2, Day 3
+          for (let i = 1; i <= 3; i++) {
+            const dateStr = data.daily.time[i];
+            const maxTemp = Math.round(data.daily.temperature_2m_max[i]);
+            const minTemp = Math.round(data.daily.temperature_2m_min[i]);
+            const code = data.daily.weather_code[i];
+            
+            let icon = '☀️';
+            let descEn = 'Clear';
+            let descAr = 'مشمس';
+            
+            if (code === 0) {
+              icon = '☀️'; descEn = 'Clear'; descAr = 'مشمس';
+            } else if (code >= 1 && code <= 3) {
+              icon = '⛅'; descEn = 'Cloudy'; descAr = 'غائم';
+            } else if (code === 45 || code === 48) {
+              icon = '🌫️'; descEn = 'Foggy'; descAr = 'ضباب';
+            } else if (code >= 51 && code <= 55) {
+              icon = '🌦️'; descEn = 'Drizzle'; descAr = 'رذاذ';
+            } else if (code >= 61 && code <= 65) {
+              icon = '🌧️'; descEn = 'Rainy'; descAr = 'ممطر';
+            } else if (code >= 71 && code <= 75) {
+              icon = '❄️'; descEn = 'Snowy'; descAr = 'ثلجي';
+            } else if (code >= 80 && code <= 82) {
+              icon = '🌧️'; descEn = 'Showers'; descAr = 'زخات';
+            } else if (code >= 95) {
+              icon = '⛈️'; descEn = 'Stormy'; descAr = 'عواصف';
+            }
+            
+            // Format days of the week in English and Arabic
+            const tempDate = new Date(dateStr);
+            const dayEn = new Intl.DateTimeFormat('en-US', { weekday: 'short' }).format(tempDate);
+            const dayAr = new Intl.DateTimeFormat('ar-EG', { weekday: 'short' }).format(tempDate);
+            
+            const dayLabel = config.language === 'english' ? dayEn : `${dayEn} / ${dayAr}`;
+            const descLabel = config.language === 'english' ? descEn : descAr;
+            
+            const item = document.createElement('div');
+            item.className = 'forecast-item';
+            item.innerHTML = `
+              <span class="forecast-day">${dayLabel}</span>
+              <span class="forecast-icon" title="${descEn}">${icon}</span>
+              <span class="forecast-desc">${descLabel}</span>
+              <span class="forecast-temp">${maxTemp}° / ${minTemp}°</span>
+            `;
+            forecastDaysContainer.appendChild(item);
+          }
         }
       }
     })
