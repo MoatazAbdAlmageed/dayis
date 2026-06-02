@@ -6,42 +6,103 @@
   <title>Today</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="newtab.css">
 </head>
 <body>
   <div class="background-overlay"></div>
   <main class="container">
-    <section class="date-card">
-      <div class="local-badge">
-        <span class="pulse-dot"></span>
-        <span class="local-label">Cairo / القاهرة</span>
-      </div>
-      
-      <div class="analog-clock">
-        <div class="clock-face">
-          <div class="hand hour-hand" id="hour-hand"></div>
-          <div class="hand minute-hand" id="minute-hand"></div>
-          <div class="hand second-hand" id="second-hand"></div>
-          <div class="center-dot"></div>
+    <div class="left-column">
+      <section class="date-card">
+        <div class="local-badge">
+          <span class="pulse-dot"></span>
+          <span class="local-label">Cairo / القاهرة</span>
         </div>
-      </div>
+        
+        <div class="analog-clock">
+          <div class="clock-face">
+            <div class="hand hour-hand" id="hour-hand"></div>
+            <div class="hand minute-hand" id="minute-hand"></div>
+            <div class="hand second-hand" id="second-hand"></div>
+            <div class="center-dot"></div>
+          </div>
+        </div>
 
-      <h1 id="date-display" class="date-display">...</h1>
-      <h2 id="date-display-ar" class="date-display-ar" dir="rtl">...</h2>
-      <p id="time-display" class="time-display">00:00:00</p>
-      
-      <div class="world-clocks">
-        <div class="clock-item">
-          <span class="clock-label">London / لندن</span>
-          <span id="london-time" class="clock-time">00:00:00</span>
+        <h1 id="date-display" class="date-display">...</h1>
+        <h2 id="date-display-ar" class="date-display-ar" dir="rtl">...</h2>
+        <p id="time-display" class="time-display">00:00:00</p>
+        
+        <div class="world-clocks">
+          <div class="clock-item">
+            <span class="clock-label">London / لندن</span>
+            <span id="london-time" class="clock-time">00:00:00</span>
+          </div>
+          <div class="clock-item">
+            <span class="clock-label">KSA / السعودية</span>
+            <span id="ksa-time" class="clock-time">00:00:00</span>
+          </div>
         </div>
-        <div class="clock-item">
-          <span class="clock-label">KSA / السعودية</span>
-          <span id="ksa-time" class="clock-time">00:00:00</span>
+      </section>
+
+      <!-- Quran Radio Player Box -->
+      <section class="radio-card">
+        <div class="radio-header">
+          <div class="radio-station-info">
+            <span class="radio-live-badge">
+              <span class="live-dot"></span>
+              <span class="live-text">LIVE / مباشر</span>
+            </span>
+            <h2 class="radio-title">Holy Quran Radio / إذاعة القرآن الكريم</h2>
+            <p class="radio-subtitle">From Cairo / من القاهرة</p>
+          </div>
         </div>
-      </div>
-    </section>
+        
+        <div class="radio-controls">
+          <button id="radio-play-btn" class="radio-play-btn" aria-label="Play Radio">
+            <!-- Play SVG Icon -->
+            <svg id="play-icon" viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+              <polygon points="5 3 19 12 5 21 5 3"></polygon>
+            </svg>
+            <!-- Pause SVG Icon -->
+            <svg id="pause-icon" viewBox="0 0 24 24" width="20" height="20" fill="currentColor" class="hidden">
+              <rect x="6" y="4" width="4" height="16"></rect>
+              <rect x="14" y="4" width="4" height="16"></rect>
+            </svg>
+          </button>
+          
+          <div class="volume-container">
+            <span class="volume-icon">🔊</span>
+            <input type="range" id="radio-volume" class="volume-slider" min="0" max="1" step="0.05" value="0.8">
+          </div>
+        </div>
+        
+        <audio id="quran-audio" src="https://stream.radiojar.com/8s5u5tpdtwzuv" preload="none"></audio>
+      </section>
+    </div>
+
+    <div class="right-column">
+      <!-- Glassmorphic Todo List -->
+      <section class="todo-card">
+        <div class="todo-header">
+          <h2 class="todo-title">Tasks / المهام</h2>
+          <span id="todo-count" class="todo-count">0 tasks</span>
+        </div>
+        
+        <form id="todo-form" class="todo-form">
+          <input type="text" id="todo-input" class="todo-input" placeholder="Add a new task... / أضف مهمة جديدة..." required autocomplete="off">
+          <button type="submit" class="todo-add-btn">+</button>
+        </form>
+        
+        <ul id="todo-list" class="todo-list">
+          <!-- Tasks will be injected dynamically -->
+        </ul>
+      </section>
+
+      <!-- Glassmorphic Focus Card -->
+      <section class="focus-card">
+        <div id="focus-container" class="focus-container"></div>
+      </section>
+    </div>
   <!-- Settings Trigger -->
   <button id="settings-toggle" class="settings-toggle" aria-label="Toggle settings">
     <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -72,6 +133,22 @@
           <option value="both">Analog & Digital / التناظرية والرقمية</option>
           <option value="digital">Digital Only / الرقمية فقط</option>
           <option value="analog">Analog Only / التناظرية فقط</option>
+        </select>
+      </div>
+
+      <div class="settings-group">
+        <label for="density-select">Layout / التنسيق</label>
+        <select id="density-select">
+          <option value="standard">Standard / الافتراضي</option>
+          <option value="compact">Compact / مدمج</option>
+        </select>
+      </div>
+
+      <div class="settings-group">
+        <label for="todo-toggle-select">Todo List / قائمة المهام</label>
+        <select id="todo-toggle-select">
+          <option value="show">Show / عرض</option>
+          <option value="hide">Hide / إخفاء</option>
         </select>
       </div>
 
