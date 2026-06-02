@@ -1,12 +1,51 @@
 /* Modern Design System for New Tab */
 :root {
-  --bg-gradient: linear-gradient(135deg, #03140e 0%, #08261a 35%, #0f402c 70%, #1c6647 100%);
   --accent-gold: #dfb76c;
   --text-primary: #ffffff;
   --text-secondary: rgba(255, 255, 255, 0.7);
   --glass-bg: rgba(255, 255, 255, 0.05);
   --glass-border: rgba(255, 255, 255, 0.1);
   --glass-shadow: rgba(0, 0, 0, 0.3);
+
+  /* Majestic Emerald - Default Theme Variable Set */
+  --bg-gradient: linear-gradient(135deg, #03140e 0%, #08261a 35%, #0f402c 70%, #1c6647 100%);
+  --overlay-color-1: rgba(223, 183, 108, 0.22);
+  --overlay-color-2: rgba(15, 64, 44, 0.5);
+  --panel-bg: rgba(11, 37, 26, 0.85);
+  --select-option-bg: #0b251a;
+}
+
+/* Background Theme Definitions */
+body.theme-emerald {
+  --bg-gradient: linear-gradient(135deg, #03140e 0%, #08261a 35%, #0f402c 70%, #1c6647 100%);
+  --overlay-color-1: rgba(223, 183, 108, 0.22);
+  --overlay-color-2: rgba(15, 64, 44, 0.5);
+  --panel-bg: rgba(11, 37, 26, 0.85);
+  --select-option-bg: #0b251a;
+}
+
+body.theme-indigo {
+  --bg-gradient: linear-gradient(135deg, #020b14 0%, #061726 35%, #0c263c 70%, #173b5a 100%);
+  --overlay-color-1: rgba(223, 183, 108, 0.22);
+  --overlay-color-2: rgba(23, 59, 90, 0.5);
+  --panel-bg: rgba(6, 23, 38, 0.85);
+  --select-option-bg: #061726;
+}
+
+body.theme-crimson {
+  --bg-gradient: linear-gradient(135deg, #1f0308 0%, #3a0812 35%, #59101e 70%, #801d30 100%);
+  --overlay-color-1: rgba(223, 183, 108, 0.22);
+  --overlay-color-2: rgba(89, 16, 30, 0.5);
+  --panel-bg: rgba(58, 8, 18, 0.85);
+  --select-option-bg: #3a0812;
+}
+
+body.theme-obsidian {
+  --bg-gradient: linear-gradient(135deg, #0a0a0a 0%, #141414 35%, #212121 70%, #2d2d2d 100%);
+  --overlay-color-1: rgba(223, 183, 108, 0.25);
+  --overlay-color-2: rgba(45, 45, 45, 0.5);
+  --panel-bg: rgba(20, 20, 20, 0.9);
+  --select-option-bg: #141414;
 }
 
 * {
@@ -25,6 +64,7 @@ body {
   align-items: center;
   overflow: hidden;
   position: relative;
+  transition: background 0.8s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 /* Dynamic background overlay to give a textured depth */
@@ -35,11 +75,12 @@ body {
   width: 100%;
   height: 100%;
   background: 
-    radial-gradient(circle at 85% 15%, rgba(223, 183, 108, 0.22) 0%, transparent 55%),
-    radial-gradient(circle at 15% 85%, rgba(15, 64, 44, 0.5) 0%, transparent 60%),
+    radial-gradient(circle at 85% 15%, var(--overlay-color-1) 0%, transparent 55%),
+    radial-gradient(circle at 15% 85%, var(--overlay-color-2) 0%, transparent 60%),
     url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60' viewBox='0 0 60 60'%3E%3Cpath d='M30 0 L40 10 H50 V20 L60 30 L50 40 V50 H40 L30 60 L20 50 H10 V40 L0 30 L10 20 V10 H20 Z' fill='none' stroke='%23dfb76c' stroke-width='0.75' stroke-opacity='0.05'/%3E%3Ccircle cx='30' cy='30' r='7' fill='none' stroke='%23dfb76c' stroke-width='0.75' stroke-opacity='0.04'/%3E%3C/svg%3E");
   background-size: cover, cover, 60px 60px;
   z-index: 1;
+  transition: background 0.8s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .container {
@@ -336,6 +377,13 @@ body {
   .clock-time {
     font-size: 1.2rem;
   }
+  .settings-body {
+    grid-template-columns: 1fr; /* Collapse grid to single column on mobile */
+    gap: 1rem;
+  }
+  .settings-group.full-width {
+    grid-column: span 1;
+  }
 }
 
 /* Floating Settings Trigger Button */
@@ -372,9 +420,9 @@ body {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%) scale(0.9);
-  width: 90%;
-  max-width: 420px;
-  background: rgba(11, 37, 26, 0.85); /* Deep emerald/forest transparent background */
+  width: 95%;
+  max-width: 800px; /* Widen modal container for horizontal flow */
+  background: var(--panel-bg); /* Deep themed transparent background */
   border: 1px solid var(--glass-border);
   border-radius: 24px;
   padding: 2rem;
@@ -383,7 +431,7 @@ body {
   box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6), 0 0 0 100vw rgba(0, 0, 0, 0.5); /* Modal Backdrop overlay */
   opacity: 0;
   pointer-events: none;
-  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease, background 0.8s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .settings-panel.active {
@@ -423,9 +471,9 @@ body {
 }
 
 .settings-body {
-  display: flex;
-  flex-direction: column;
-  gap: 1.2rem;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* 2 options per row side-by-side */
+  gap: 1.2rem 1.8rem;
   margin-bottom: 1.8rem;
 }
 
@@ -434,6 +482,10 @@ body {
   flex-direction: column;
   gap: 0.5rem;
   text-align: left;
+}
+
+.settings-group.full-width {
+  grid-column: span 2;
 }
 
 .settings-group label {
@@ -462,7 +514,7 @@ body {
 }
 
 .settings-group select option {
-  background-color: #0b251a;
+  background-color: var(--select-option-bg);
   color: var(--text-primary);
   padding: 0.5rem;
 }
@@ -473,7 +525,7 @@ body {
   border: none;
   border-radius: 14px;
   padding: 0.85rem;
-  color: #0b251a;
+  color: var(--select-option-bg);
   font-weight: 600;
   font-size: 0.95rem;
   cursor: pointer;
@@ -596,7 +648,7 @@ body {
   border-radius: 12px;
   width: 44px;
   height: 44px;
-  color: #0b251a;
+  color: var(--select-option-bg);
   font-weight: 600;
   font-size: 1.4rem;
   cursor: pointer;
@@ -687,7 +739,7 @@ body {
   left: 5px;
   width: 4px;
   height: 8px;
-  border: solid #0b251a;
+  border: solid var(--select-option-bg);
   border-width: 0 2px 2px 0;
   transform: rotate(45deg);
 }
@@ -981,7 +1033,7 @@ body {
   left: 6px;
   width: 4px;
   height: 8px;
-  border: solid #0b251a;
+  border: solid var(--select-option-bg);
   border-width: 0 2px 2px 0;
   transform: rotate(45deg);
 }

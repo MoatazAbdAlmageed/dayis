@@ -7,7 +7,8 @@ let config = {
   density: 'standard',
   todoToggle: 'show',
   secondClock: 'Europe/London|London / لندن',
-  thirdClock: 'Asia/Riyadh|KSA / السعودية'
+  thirdClock: 'Asia/Riyadh|KSA / السعودية',
+  theme: 'emerald'
 };
 
 // Load preferences from localStorage and apply UI visibility styles
@@ -18,6 +19,7 @@ function loadConfig() {
   config.todoToggle = localStorage.getItem('todoToggle') || 'show';
   config.secondClock = localStorage.getItem('secondClock') || 'Europe/London|London / لندن';
   config.thirdClock = localStorage.getItem('thirdClock') || 'Asia/Riyadh|KSA / السعودية';
+  config.theme = localStorage.getItem('theme') || 'emerald';
   
   // Update select inputs to match config
   const langSel = document.getElementById('language-select');
@@ -26,6 +28,7 @@ function loadConfig() {
   const todoToggleSel = document.getElementById('todo-toggle-select');
   const secondClockSel = document.getElementById('second-clock-select');
   const thirdClockSel = document.getElementById('third-clock-select');
+  const themeSel = document.getElementById('theme-select');
 
   if (langSel) langSel.value = config.language;
   if (clockStyleSel) clockStyleSel.value = config.clockStyle;
@@ -33,12 +36,17 @@ function loadConfig() {
   if (todoToggleSel) todoToggleSel.value = config.todoToggle;
   if (secondClockSel) secondClockSel.value = config.secondClock;
   if (thirdClockSel) thirdClockSel.value = config.thirdClock;
+  if (themeSel) themeSel.value = config.theme;
 
   applyUIConfig();
 }
 
 // Apply layout preferences dynamically based on the current configuration
 function applyUIConfig() {
+  // Apply Background Theme classes
+  document.body.classList.remove('theme-emerald', 'theme-indigo', 'theme-crimson', 'theme-obsidian');
+  document.body.classList.add(`theme-${config.theme}`);
+
   // Cairo location label language override
   const localLabel = document.querySelector('.local-label');
   if (localLabel) {
@@ -141,6 +149,7 @@ function saveConfig() {
   localStorage.setItem('todoToggle', document.getElementById('todo-toggle-select').value);
   localStorage.setItem('secondClock', document.getElementById('second-clock-select').value);
   localStorage.setItem('thirdClock', document.getElementById('third-clock-select').value);
+  localStorage.setItem('theme', document.getElementById('theme-select').value);
   
   loadConfig();
   document.getElementById('settings-panel').classList.remove('active');
