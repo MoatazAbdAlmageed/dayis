@@ -13,21 +13,98 @@
   <div class="background-overlay"></div>
   <main class="container">
     <section class="date-card">
+      <div class="local-badge">
+        <span class="pulse-dot"></span>
+        <span class="local-label">Cairo / القاهرة</span>
+      </div>
+      
+      <div class="analog-clock">
+        <div class="clock-face">
+          <div class="hand hour-hand" id="hour-hand"></div>
+          <div class="hand minute-hand" id="minute-hand"></div>
+          <div class="hand second-hand" id="second-hand"></div>
+          <div class="center-dot"></div>
+        </div>
+      </div>
+
       <h1 id="date-display" class="date-display">...</h1>
+      <h2 id="date-display-ar" class="date-display-ar" dir="rtl">...</h2>
       <p id="time-display" class="time-display">00:00:00</p>
       
       <div class="world-clocks">
         <div class="clock-item">
-          <span class="clock-label">London</span>
+          <span class="clock-label">London / لندن</span>
           <span id="london-time" class="clock-time">00:00:00</span>
         </div>
         <div class="clock-item">
-          <span class="clock-label">KSA</span>
+          <span class="clock-label">KSA / السعودية</span>
           <span id="ksa-time" class="clock-time">00:00:00</span>
         </div>
       </div>
     </section>
-  </main>
+  <!-- Settings Trigger -->
+  <button id="settings-toggle" class="settings-toggle" aria-label="Toggle settings">
+    <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="12" cy="12" r="3"></circle>
+      <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+    </svg>
+  </button>
+
+  <!-- Settings Panel Modal -->
+  <div id="settings-panel" class="settings-panel">
+    <div class="settings-header">
+      <h2>Preferences / الإعدادات</h2>
+      <button id="settings-close" class="settings-close-btn" aria-label="Close settings">&times;</button>
+    </div>
+    
+    <div class="settings-body">
+      <div class="settings-group">
+        <label for="language-select">Language / اللغة</label>
+        <select id="language-select">
+          <option value="both">Arabic & English / العربية والإنجليزية</option>
+          <option value="english">English Only / الإنجليزية فقط</option>
+        </select>
+      </div>
+
+      <div class="settings-group">
+        <label for="clock-type-select">Clock Style / نمط الساعة</label>
+        <select id="clock-type-select">
+          <option value="both">Analog & Digital / التناظرية والرقمية</option>
+          <option value="digital">Digital Only / الرقمية فقط</option>
+          <option value="analog">Analog Only / التناظرية فقط</option>
+        </select>
+      </div>
+
+      <div class="settings-group">
+        <label for="second-clock-select">Second Clock / الساعة الثانية</label>
+        <select id="second-clock-select">
+          <option value="Europe/London|London / لندن">London / لندن</option>
+          <option value="Asia/Riyadh|KSA / السعودية">KSA / السعودية</option>
+          <option value="America/New_York|New York / نيويورك">New York / نيويورك</option>
+          <option value="Asia/Tokyo|Tokyo / طوكيو">Tokyo / طوكيو</option>
+          <option value="Asia/Dubai|Dubai / دبي">Dubai / دبي</option>
+          <option value="Europe/Paris|Paris / باريس">Paris / باريس</option>
+          <option value="Australia/Sydney|Sydney / سيدني">Sydney / سيدني</option>
+        </select>
+      </div>
+
+      <div class="settings-group">
+        <label for="third-clock-select">Third Clock / الساعة الثالثة</label>
+        <select id="third-clock-select">
+          <option value="Asia/Riyadh|KSA / السعودية">KSA / السعودية</option>
+          <option value="Europe/London|London / لندن">London / لندن</option>
+          <option value="America/New_York|New York / نيويورك">New York / نيويورك</option>
+          <option value="Asia/Tokyo|Tokyo / طوكيو">Tokyo / طوكيو</option>
+          <option value="Asia/Dubai|Dubai / دبي">Dubai / دبي</option>
+          <option value="Europe/Paris|Paris / باريس">Paris / باريس</option>
+          <option value="Australia/Sydney|Sydney / سيدني">Sydney / سيدني</option>
+        </select>
+      </div>
+    </div>
+    
+    <button id="settings-save-btn" class="settings-save-btn">Save Changes / حفظ</button>
+  </div>
+
   <script src="newtab.js"></script>
 </body>
 </html>
