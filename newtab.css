@@ -121,6 +121,20 @@ body::-webkit-scrollbar-thumb:hover {
   animation: fadeInUp 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
+/* ── Shared: center every card's content both X and Y ── */
+.date-card,
+.focus-card,
+.weather-forecast-card,
+.radio-card,
+.todo-card,
+.favsites-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* vertical centre */
+  align-items: center;     /* horizontal centre */
+  text-align: center;
+}
+
 /* Glassmorphic Date Card */
 .date-card {
   background: rgba(255, 255, 255, 0.03);
@@ -130,10 +144,6 @@ body::-webkit-scrollbar-thumb:hover {
   backdrop-filter: blur(20px);
   box-shadow: 0 20px 50px var(--glass-shadow);
   transition: box-shadow 0.5s ease;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
 }
 
 .date-card:hover {
@@ -586,9 +596,16 @@ body::-webkit-scrollbar-thumb:hover {
   box-shadow: 0 20px 50px var(--glass-shadow);
   margin-top: 0;
   width: 100%;
-  text-align: left;
   transition: box-shadow 0.5s ease;
   animation: fadeInUp 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.2s forwards;
+}
+
+/* Inner todo elements: stretch full width, left-align text */
+.todo-header,
+.todo-form,
+.todo-list {
+  width: 100%;
+  text-align: left;
 }
 
 .todo-card:hover {
@@ -1468,13 +1485,19 @@ body::-webkit-scrollbar-thumb:hover {
   backdrop-filter: blur(20px);
   box-shadow: 0 20px 50px var(--glass-shadow);
   width: 100%;
-  text-align: left;
   transition: box-shadow 0.5s ease;
   animation: fadeInUp 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.6s forwards;
 }
 
 .favsites-card:hover {
   box-shadow: 0 25px 60px rgba(0, 0, 0, 0.4), 0 0 15px rgba(223, 183, 108, 0.05);
+}
+
+/* Inner favsites elements: full-width, left-aligned */
+.favsites-header,
+.favsites-list {
+  width: 100%;
+  text-align: left;
 }
 
 .favsites-header {
