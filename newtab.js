@@ -2,7 +2,7 @@
 
 // Global configuration object with sensible defaults
 let config = {
-  language: 'both',
+  language: 'english',
   clockStyle: 'both',
   density: 'standard',
   todoToggle: 'show',
@@ -13,7 +13,7 @@ let config = {
 
 // Load preferences from localStorage and apply UI visibility styles
 function loadConfig() {
-  config.language = localStorage.getItem('language') || 'both';
+  config.language = localStorage.getItem('language') || 'english';
   config.clockStyle = localStorage.getItem('clockStyle') || 'both';
   config.density = localStorage.getItem('density') || 'standard';
   config.todoToggle = localStorage.getItem('todoToggle') || 'show';
@@ -50,13 +50,17 @@ function applyUIConfig() {
   // Cairo location label language override
   const localLabel = document.querySelector('.local-label');
   if (localLabel) {
-    localLabel.textContent = config.language === 'english' ? 'Cairo' : 'Cairo / القاهرة';
+    localLabel.textContent = config.language === 'english' ? 'Cairo' : 'القاهرة';
   }
 
-  // Arabic date visibility
+  // Arabic/English date visibility
   const dateAr = document.getElementById('date-display-ar');
+  const dateEn = document.getElementById('date-display');
   if (dateAr) {
     dateAr.style.display = config.language === 'english' ? 'none' : 'block';
+  }
+  if (dateEn) {
+    dateEn.style.display = config.language === 'arabic' ? 'none' : 'block';
   }
 
   // Clock type visibility options (Analog / Digital / Both)
@@ -74,14 +78,14 @@ function applyUIConfig() {
   const secondLabel = config.secondClock.split('|')[1];
   const secondLabelEl = document.querySelectorAll('.clock-label')[0];
   if (secondLabelEl) {
-    secondLabelEl.textContent = config.language === 'english' ? secondLabel.split(' / ')[0] : secondLabel;
+    secondLabelEl.textContent = config.language === 'english' ? secondLabel.split(' / ')[0] : secondLabel.split(' / ')[1];
   }
 
   // Third Clock labels and translations
   const thirdLabel = config.thirdClock.split('|')[1];
   const thirdLabelEl = document.querySelectorAll('.clock-label')[1];
   if (thirdLabelEl) {
-    thirdLabelEl.textContent = config.language === 'english' ? thirdLabel.split(' / ')[0] : thirdLabel;
+    thirdLabelEl.textContent = config.language === 'english' ? thirdLabel.split(' / ')[0] : thirdLabel.split(' / ')[1];
   }
 
   // Toggle Tasks card visibility selectively rather than shutting down right-column
@@ -106,19 +110,25 @@ function applyUIConfig() {
   const liveText = document.querySelector('.live-text');
   
   if (radioTitle) {
-    radioTitle.textContent = config.language === 'english' ? 'Holy Quran Radio' : 'Holy Quran Radio / إذاعة القرآن الكريم';
+    radioTitle.textContent = config.language === 'english' ? 'Holy Quran Radio' : 'إذاعة القرآن الكريم';
   }
   if (radioSubtitle) {
-    radioSubtitle.textContent = config.language === 'english' ? 'From Cairo' : 'From Cairo / من القاهرة';
+    radioSubtitle.textContent = config.language === 'english' ? 'From Cairo' : 'من القاهرة';
   }
   if (liveText) {
-    liveText.textContent = config.language === 'english' ? 'LIVE' : 'LIVE / مباشر';
+    liveText.textContent = config.language === 'english' ? 'LIVE' : 'مباشر';
   }
 
   // 3-Day Forecast translation
   const forecastTitle = document.querySelector('.forecast-title');
   if (forecastTitle) {
-    forecastTitle.textContent = config.language === 'english' ? '3-Day Forecast' : '3-Day Forecast / توقعات ٣ أيام';
+    forecastTitle.textContent = config.language === 'english' ? '3-Day Forecast' : 'توقعات ٣ أيام';
+  }
+
+  // Favorite Sites translation
+  const favsitesTitle = document.getElementById('favsites-title-el');
+  if (favsitesTitle) {
+    favsitesTitle.textContent = config.language === 'english' ? 'Favorite Sites' : 'المواقع المفضلة';
   }
 
   // Refresh todo text/placeholders for selected language
@@ -330,10 +340,10 @@ function renderTodos() {
   
   // Update translation for headers and input fields dynamically
   if (todoTitle) {
-    todoTitle.textContent = config.language === 'english' ? 'Tasks' : 'Tasks / المهام';
+    todoTitle.textContent = config.language === 'english' ? 'Tasks' : 'المهام';
   }
   if (todoInput) {
-    todoInput.placeholder = config.language === 'english' ? 'Add a new task...' : 'Add a new task... / أضف مهمة جديدة...';
+    todoInput.placeholder = config.language === 'english' ? 'Add a new task...' : 'أضف مهمة جديدة...';
   }
   
   // Count incomplete items
@@ -342,7 +352,7 @@ function renderTodos() {
     if (config.language === 'english') {
       todoCount.textContent = `${activeCount} task${activeCount !== 1 ? 's' : ''} left`;
     } else {
-      todoCount.textContent = `${activeCount} task${activeCount !== 1 ? 's' : ''} / ${activeCount} مهام متبقية`;
+      todoCount.textContent = `${activeCount} مهام متبقية`;
     }
   }
   
@@ -406,8 +416,8 @@ function renderFocus() {
   }
 
   const isEn = config.language === 'english';
-  const promptText = isEn ? 'What is your main focus for today?' : 'What is your main focus for today? / ما هو تركيزك اليوم؟';
-  const inputPlaceholder = isEn ? 'Write your focus here...' : 'Write your focus here... / اكتب تركيزك هنا...';
+  const promptText = isEn ? 'What is your main focus for today?' : 'ما هو تركيزك اليوم؟';
+  const inputPlaceholder = isEn ? 'Write your focus here...' : 'اكتب تركيزك هنا...';
 
   if (!focusText) {
     // Show Daily Focus Form
@@ -441,7 +451,7 @@ function renderFocus() {
     
     container.innerHTML = `
       <div class="focus-display-wrapper">
-        <span class="focus-today-label">${isEn ? 'TODAY' : 'TODAY / اليوم'}</span>
+        <span class="focus-today-label">${isEn ? 'TODAY' : 'اليوم'}</span>
         <div class="focus-content-row">
           <div class="focus-check ${isCompleted ? 'completed' : ''}" id="focus-checkbox"></div>
           <span class="focus-text-display ${isCompleted ? 'completed' : ''}">${focusText}</span>
@@ -607,7 +617,7 @@ function fetchWeather() {
             const dayEn = new Intl.DateTimeFormat('en-US', { weekday: 'short' }).format(tempDate);
             const dayAr = new Intl.DateTimeFormat('ar-EG', { weekday: 'short' }).format(tempDate);
             
-            const dayLabel = config.language === 'english' ? dayEn : `${dayEn} / ${dayAr}`;
+            const dayLabel = config.language === 'english' ? dayEn : dayAr;
             const descLabel = config.language === 'english' ? descEn : descAr;
             
             const item = document.createElement('div');
@@ -715,11 +725,11 @@ function updatePrayerUI() {
   const titleEl = document.getElementById('prayer-title-el');
 
   if (titleEl) {
-    titleEl.textContent = config.language === 'english' ? 'Next Prayer' : 'Next Prayer / الصلاة القادمة';
+    titleEl.textContent = config.language === 'english' ? 'Next Prayer' : 'الصلاة القادمة';
   }
 
   if (nameEl) {
-    nameEl.textContent = config.language === 'english' ? nextPrayer.name : `${nextPrayer.name} / ${nextPrayer.nameAr}`;
+    nameEl.textContent = config.language === 'english' ? nextPrayer.name : nextPrayer.nameAr;
   }
 
   if (timeEl) {
@@ -754,7 +764,7 @@ function updatePrayerCountdown() {
     text += `${minutesLeft}m left`;
     
     if (config.language !== 'english') {
-      text += ' / ' + text.replace('h', 'س').replace('m left', 'د متبقية');
+      text = text.replace('h ', 'س ').replace('m left', 'د متبقية').replace(' left', ' متبقية');
     }
     
     countdownEl.textContent = text;
