@@ -74,6 +74,14 @@ body {
   box-shadow: 0 25px 60px rgba(0, 0, 0, 0.4), 0 0 15px rgba(223, 183, 108, 0.1);
 }
 
+.card-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 2rem;
+}
+
 .local-badge {
   display: inline-flex;
   align-items: center;
@@ -82,12 +90,39 @@ body {
   border: 1px solid var(--glass-border);
   padding: 0.4rem 0.9rem;
   border-radius: 50px;
-  margin-bottom: 1.5rem;
   transition: border-color 0.3s ease;
 }
 
 .local-badge:hover {
   border-color: rgba(223, 183, 108, 0.4);
+}
+
+.weather-widget {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--glass-border);
+  padding: 0.4rem 0.9rem;
+  border-radius: 50px;
+  cursor: help;
+  transition: border-color 0.3s ease, background 0.3s ease;
+}
+
+.weather-widget:hover {
+  border-color: rgba(223, 183, 108, 0.4);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.weather-temp {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  letter-spacing: 0.05em;
+}
+
+.weather-icon {
+  font-size: 1.1rem;
 }
 
 .local-label {
@@ -1200,4 +1235,20 @@ body {
   left: 4px;
   width: 3px;
   height: 6px;
+}
+
+.container.compact .card-header-row {
+  margin-bottom: 1rem;
+}
+
+.container.compact .weather-widget {
+  padding: 0.3rem 0.7rem;
+}
+
+.container.compact .weather-temp {
+  font-size: 0.75rem;
+}
+
+.container.compact .weather-icon {
+  font-size: 0.95rem;
 }

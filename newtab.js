@@ -285,6 +285,12 @@ document.addEventListener('DOMContentLoaded', () => {
   if (typeof initRadio === 'function') {
     initRadio();
   }
+
+  // Fetch Weather
+  if (typeof fetchWeather === 'function') {
+    fetchWeather();
+    setInterval(fetchWeather, 30 * 60 * 1000);
+  }
   
   // Periodic loops
   updateDateTime();
@@ -499,4 +505,61 @@ function initRadio() {
       audio.volume = e.target.value;
     });
   }
+}
+
+// Fetch Weather from Open-Meteo for Cairo (Local Target Location)
+function fetchWeather() {
+  const latitude = 30.0444;
+  const longitude = 31.2357;
+  const url = `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current=temperature_2m,weather_code`;
+
+  fetch(url)
+    .then(res => {
+      if (!res.ok) throw new Error('Weather API network response failed');
+      return res.json();
+    })
+    .then(data => {
+      if (data && data.current) {
+        const temp = Math.round(data.current.temperature_2m);
+        const code = data.current.weather_code;
+        
+        let icon = '☀️';
+        let descEn = 'Clear';
+        let descAr = 'مشمس';
+        
+        if (code === 0) {
+          icon = '☀️'; descEn = 'Clear'; descAr = 'مشمس';
+        } else if (code >= 1 && code <= 3) {
+          icon = '⛅'; descEn = 'Cloudy'; descAr = 'غائم جزئياً';
+        } else if (code === 45 || code === 48) {
+          icon = '🌫️'; descEn = 'Foggy'; descAr = 'ضبابي';
+        } else if (code >= 51 && code <= 55) {
+          icon = '🌦️'; descEn = 'Drizzle'; descAr = 'رذاذ';
+        } else if (code >= 61 && code <= 65) {
+          icon = '🌧️'; descEn = 'Rainy'; descAr = 'ممطر';
+        } else if (code >= 71 && code <= 75) {
+          icon = '❄️'; descEn = 'Snowy'; descAr = 'ثلجي';
+        } else if (code >= 80 && code <= 82) {
+          icon = '🌧️'; descEn = 'Showers'; descAr = 'زخات مطر';
+        } else if (code >= 95) {
+          icon = '⛈️'; descEn = 'Stormy'; descAr = 'رعدي';
+        }
+        
+        const tempEl = document.getElementById('weather-temp');
+        const iconEl = document.getElementById('weather-icon');
+        const widgetEl = document.getElementById('weather-widget');
+        
+        if (tempEl) tempEl.textContent = `${temp}°C`;
+        if (iconEl) iconEl.textContent = icon;
+        if (widgetEl) {
+          const desc = config.language === 'english' ? descEn : `${descEn} / ${descAr}`;
+          widgetEl.title = `${desc} - Cairo`;
+        }
+      }
+    })
+    .catch(err => {
+      console.error('Error fetching weather:', err);
+      const tempEl = document.getElementById('weather-temp');
+      if (tempEl) tempEl.textContent = '--°C';
+    });
 }
