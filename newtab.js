@@ -84,10 +84,10 @@ function applyUIConfig() {
     thirdLabelEl.textContent = config.language === 'english' ? thirdLabel.split(' / ')[0] : thirdLabel;
   }
 
-  // Toggle Right Column visibility
-  const rightColumn = document.querySelector('.right-column');
-  if (rightColumn) {
-    rightColumn.style.display = config.todoToggle === 'hide' ? 'none' : 'flex';
+  // Toggle Tasks card visibility selectively rather than shutting down right-column
+  const todoCard = document.querySelector('.todo-card');
+  if (todoCard) {
+    todoCard.style.display = config.todoToggle === 'hide' ? 'none' : 'block';
   }
 
   // Apply layout density class to container
@@ -97,15 +97,6 @@ function applyUIConfig() {
       container.classList.add('compact');
     } else {
       container.classList.remove('compact');
-    }
-
-    // Collapse container grid dynamically if Todo list is hidden
-    if (config.todoToggle === 'hide') {
-      container.style.gridTemplateColumns = '1fr';
-      container.style.maxWidth = '600px';
-    } else {
-      container.style.gridTemplateColumns = '';
-      container.style.maxWidth = '';
     }
   }
 

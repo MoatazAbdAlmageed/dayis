@@ -12,6 +12,7 @@
 <body>
   <div class="background-overlay"></div>
   <main class="container">
+    <!-- Column 1: Left Column -->
     <div class="left-column">
       <section class="date-card">
         <div class="card-header-row">
@@ -83,9 +84,27 @@
         </div>
         <audio id="quran-audio" src="https://stream.radiojar.com/8s5u5tpdtwzuv" preload="none"></audio>
       </section>
-
     </div>
 
+    <!-- Column 2: Center Column -->
+    <div class="center-column">
+      <!-- Glassmorphic Focus Card -->
+      <section class="focus-card">
+        <div id="focus-container" class="focus-container"></div>
+      </section>
+
+      <!-- 3-Day Weather Forecast Box -->
+      <section class="weather-forecast-card">
+        <div class="forecast-header">
+          <h2 class="forecast-title">3-Day Forecast / توقعات ٣ أيام</h2>
+        </div>
+        <div id="forecast-days" class="forecast-days">
+          <!-- Dynamic forecast items will be injected here -->
+        </div>
+      </section>
+    </div>
+
+    <!-- Column 3: Right Column -->
     <div class="right-column">
       <!-- Glassmorphic Todo List -->
       <section class="todo-card">
@@ -104,21 +123,38 @@
         </ul>
       </section>
 
-      <!-- Glassmorphic Focus Card -->
-      <section class="focus-card">
-        <div id="focus-container" class="focus-container"></div>
-      </section>
-
-      <!-- 3-Day Weather Forecast Box -->
-      <section class="weather-forecast-card">
-        <div class="forecast-header">
-          <h2 class="forecast-title">3-Day Forecast / توقعات ٣ أيام</h2>
+      <!-- Glassmorphic Favorite Sites Card -->
+      <section class="favsites-card">
+        <div class="favsites-header">
+          <h2 class="favsites-title">Favorite Sites / المواقع المفضلة</h2>
         </div>
-        <div id="forecast-days" class="forecast-days">
-          <!-- Dynamic forecast items will be injected here -->
+        <div class="favsites-list">
+          <a href="https://wuzzuf.net/search/jobs?q=php&a=navbl" target="_blank" rel="noopener noreferrer" class="favsite-item">
+            <span class="favsite-icon">💼</span>
+            <div class="favsite-info">
+              <span class="favsite-name">Wuzzuf PHP Jobs</span>
+              <span class="favsite-url">wuzzuf.net</span>
+            </div>
+          </a>
+          <a href="https://www.linkedin.com/notifications/?=" target="_blank" rel="noopener noreferrer" class="favsite-item">
+            <span class="favsite-icon">🔔</span>
+            <div class="favsite-info">
+              <span class="favsite-name">LinkedIn Notifications</span>
+              <span class="favsite-url">linkedin.com</span>
+            </div>
+          </a>
+          <a href="https://docs.google.com/forms/d/e/1FAIpQLSfScMMS-QhL49L7o7W-vHGqzKCq3FVOvSSCY1G1-DJGM-uHzg/viewform" target="_blank" rel="noopener noreferrer" class="favsite-item">
+            <span class="favsite-icon">📝</span>
+            <div class="favsite-info">
+              <span class="favsite-name">Google Forms</span>
+              <span class="favsite-url">docs.google.com</span>
+            </div>
+          </a>
         </div>
       </section>
     </div>
+
+
   <!-- Settings Trigger -->
   <button id="settings-toggle" class="settings-toggle" aria-label="Toggle settings">
     <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
