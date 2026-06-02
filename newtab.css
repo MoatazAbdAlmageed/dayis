@@ -135,7 +135,8 @@ body::-webkit-scrollbar-thumb:hover {
 .weather-forecast-card,
 .radio-card,
 .todo-card,
-.favsites-card {
+.favsites-card,
+.prayer-card {
   display: flex;
   flex-direction: column;
   justify-content: center; /* vertical centre */
@@ -1597,4 +1598,62 @@ body::-webkit-scrollbar-thumb:hover {
   padding: 0.6rem 1rem;
 }
 
+/* Glassmorphic Prayer Card */
+.prayer-card {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--glass-border);
+  border-radius: 16px;
+  padding: 0.9rem 1rem;
+  backdrop-filter: blur(20px);
+  box-shadow: 0 20px 50px var(--glass-shadow);
+  width: 100%;
+  transition: box-shadow 0.5s ease;
+  animation: fadeInUp 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.7s forwards;
+}
 
+.prayer-card:hover {
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.4), 0 0 15px rgba(223, 183, 108, 0.05);
+}
+
+.prayer-header,
+.prayer-content {
+  width: 100%;
+}
+
+.prayer-header {
+  margin-bottom: 0.5rem;
+}
+
+.prayer-title {
+  font-size: 1.2rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  background: linear-gradient(to right, #ffffff, var(--accent-gold));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.prayer-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  text-align: center;
+}
+
+.prayer-name {
+  font-size: 1.1rem;
+  color: var(--accent-gold);
+  font-weight: 500;
+}
+
+.prayer-time {
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: var(--text-primary);
+}
+
+.prayer-countdown {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}

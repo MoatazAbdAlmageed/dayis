@@ -241,6 +241,8 @@ function updateDateTime() {
     });
     document.getElementById('time-display').textContent = now.toLocaleTimeString();
   }
+
+  if (typeof updatePrayerCountdown === 'function') updatePrayerCountdown();
 }
 
 // Global initialization
@@ -299,6 +301,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
   
   // Periodic loops
+  fetchPrayerTimes();
   updateDateTime();
   setInterval(updateDateTime, 1000);
 });
@@ -625,4 +628,135 @@ function fetchWeather() {
       const tempEl = document.getElementById('weather-temp');
       if (tempEl) tempEl.textContent = '--°C';
     });
+}
+
+// Prayer Times Management
+let nextPrayer = null;
+
+async function fetchPrayerTimes() {
+  try {
+    const dateStr = new Date().toISOString().split('T')[0];
+    const cachedData = localStorage.getItem('prayerTimesData');
+    let timings = null;
+
+    if (cachedData) {
+      const parsed = JSON.parse(cachedData);
+      if (parsed.date === dateStr) {
+        timings = parsed.timings;
+      }
+    }
+
+    if (!timings) {
+      const response = await fetch('https://api.aladhan.com/v1/timingsByCity?city=Cairo&country=Egypt&method=5');
+      const data = await response.json();
+      timings = data.data.timings;
+      localStorage.setItem('prayerTimesData', JSON.stringify({
+        date: dateStr,
+        timings: timings
+      }));
+    }
+
+    calculateNextPrayer(timings);
+  } catch (error) {
+    console.error('Error fetching prayer times:', error);
+  }
+}
+
+function calculateNextPrayer(timings) {
+  const now = new Date();
+  const currentTime = now.getHours() * 60 + now.getMinutes();
+
+  const prayers = ['Fajr', 'Dhuhr', 'Asr', 'Maghrib', 'Isha'];
+  const prayerNamesAr = {
+    'Fajr': 'الفجر',
+    'Dhuhr': 'الظهر',
+    'Asr': 'العصر',
+    'Maghrib': 'المغرب',
+    'Isha': 'العشاء'
+  };
+
+  let foundNext = false;
+
+  for (let prayer of prayers) {
+    const timeStr = timings[prayer].split(' ')[0];
+    const [hours, minutes] = timeStr.split(':').map(Number);
+    const prayerTime = hours * 60 + minutes;
+
+    if (prayerTime > currentTime) {
+      nextPrayer = {
+        name: prayer,
+        nameAr: prayerNamesAr[prayer],
+        time: timeStr,
+        timeMinutes: prayerTime
+      };
+      foundNext = true;
+      break;
+    }
+  }
+
+  if (!foundNext) {
+    const timeStrFajr = timings['Fajr'].split(' ')[0];
+    nextPrayer = {
+      name: 'Fajr',
+      nameAr: 'الفجر',
+      time: timeStrFajr,
+      timeMinutes: parseInt(timeStrFajr.split(':')[0]) * 60 + parseInt(timeStrFajr.split(':')[1]) + 24 * 60
+    };
+  }
+
+  updatePrayerUI();
+}
+
+function updatePrayerUI() {
+  if (!nextPrayer) return;
+  
+  const nameEl = document.getElementById('next-prayer-name');
+  const timeEl = document.getElementById('next-prayer-time');
+  const titleEl = document.getElementById('prayer-title-el');
+
+  if (titleEl) {
+    titleEl.textContent = config.language === 'english' ? 'Next Prayer' : 'Next Prayer / الصلاة القادمة';
+  }
+
+  if (nameEl) {
+    nameEl.textContent = config.language === 'english' ? nextPrayer.name : `${nextPrayer.name} / ${nextPrayer.nameAr}`;
+  }
+
+  if (timeEl) {
+    const [h, m] = nextPrayer.time.split(':');
+    const hour = parseInt(h, 10);
+    const ampm = hour >= 12 ? 'PM' : 'AM';
+    const hour12 = hour % 12 || 12;
+    timeEl.textContent = `${hour12}:${m} ${ampm}`;
+  }
+
+  updatePrayerCountdown();
+}
+
+function updatePrayerCountdown() {
+  if (!nextPrayer) return;
+  const now = new Date();
+  const currentMinutes = now.getHours() * 60 + now.getMinutes();
+  
+  let diff = nextPrayer.timeMinutes - currentMinutes;
+  if (diff < 0) {
+    fetchPrayerTimes();
+    return;
+  }
+
+  const hoursLeft = Math.floor(diff / 60);
+  const minutesLeft = diff % 60;
+
+  const countdownEl = document.getElementById('prayer-countdown');
+  if (countdownEl) {
+    let text = '';
+    if (hoursLeft > 0) text += `${hoursLeft}h `;
+    text += `${minutesLeft}m left`;
+    
+    if (config.language !== 'english') {
+      text += ' / ' + text.replace('h', 'س').replace('m left', 'د متبقية');
+    }
+    
+    countdownEl.textContent = text;
+  }
 }

@@ -22,7 +22,8 @@
 - Col 2, Row 2: `.radio-card` (Quran radio player)
 - Col 3, Row 1: `.todo-card`  (task list)
 - Col 3, Row 2: `.favsites-card` (favorite sites)
-- Col 4: **empty** — columns are left-aligned so the 4th column stays vacant
+- Col 4, Row 1: `.prayer-card` (next prayer times in Cairo)
+- Col 4, Row 2: **empty**
 
 > RULE: Cards must ALWAYS flow column-first (top → bottom per column, left → right across columns). `justify-content: start` keeps them left-aligned.
 
