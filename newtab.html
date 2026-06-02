@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Today</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="newtab.css">
+</head>
+<body>
+  <div class="background-overlay"></div>
+  <main class="container">
+    <section class="date-card">
+      <h1 id="date-display" class="date-display">...</h1>
+      <p id="time-display" class="time-display">00:00:00</p>
+      
+      <div class="world-clocks">
+        <div class="clock-item">
+          <span class="clock-label">London</span>
+          <span id="london-time" class="clock-time">00:00:00</span>
+        </div>
+        <div class="clock-item">
+          <span class="clock-label">KSA</span>
+          <span id="ksa-time" class="clock-time">00:00:00</span>
+        </div>
+      </div>
+    </section>
+  </main>
+  <script src="newtab.js"></script>
+</body>
+</html>
