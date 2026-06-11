@@ -126,7 +126,7 @@ body::-webkit-scrollbar-thumb:hover {
   box-sizing: border-box;
   align-items: stretch;   /* Cards stretch to fill their row cell */
   justify-content: start; /* Align columns to the left */
-  animation: fadeInUp 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  /* animation: fadeInUp disabled */
 }
 
 /* ── Shared: center every card's content both X and Y ── */
@@ -407,8 +407,8 @@ body::-webkit-scrollbar-thumb:hover {
 /* Animations */
 @keyframes fadeInUp {
   from {
-    opacity: 0;
-    transform: translateY(30px);
+    opacity: 1;
+    transform: translateY(0);
   }
   to {
     opacity: 1;
@@ -624,7 +624,7 @@ body::-webkit-scrollbar-thumb:hover {
   margin-top: 0;
   width: 100%;
   transition: box-shadow 0.5s ease;
-  animation: fadeInUp 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.2s forwards;
+  /* animation: fadeInUp disabled */
 }
 
 /* Inner todo elements: stretch full width, left-align text */
@@ -660,7 +660,7 @@ body::-webkit-scrollbar-thumb:hover {
   width: 100%;
   text-align: center;
   transition: box-shadow 0.5s ease;
-  animation: fadeInUp 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.3s forwards;
+  /* animation: fadeInUp disabled */
 }
 
 .focus-card:hover {
@@ -1058,7 +1058,7 @@ body::-webkit-scrollbar-thumb:hover {
   align-items: center;
   gap: 0.4rem;
   width: 100%;
-  animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  /* animation: fadeInUp disabled */
 }
 
 .focus-today-label {
@@ -1154,7 +1154,7 @@ body::-webkit-scrollbar-thumb:hover {
   width: 100%;
   text-align: left;
   transition: box-shadow 0.5s ease;
-  animation: fadeInUp 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.4s forwards;
+  /* animation: fadeInUp disabled */
 }
 
 .radio-card:hover {
@@ -1388,7 +1388,7 @@ body::-webkit-scrollbar-thumb:hover {
   width: 100%;
   text-align: left;
   transition: box-shadow 0.5s ease;
-  animation: fadeInUp 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.5s forwards;
+  /* animation: fadeInUp disabled */
 }
 
 .weather-forecast-card:hover {
@@ -1513,7 +1513,7 @@ body::-webkit-scrollbar-thumb:hover {
   box-shadow: 0 20px 50px var(--glass-shadow);
   width: 100%;
   transition: box-shadow 0.5s ease;
-  animation: fadeInUp 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.6s forwards;
+  /* animation: fadeInUp disabled */
 }
 
 .favsites-card:hover {
@@ -1608,7 +1608,7 @@ body::-webkit-scrollbar-thumb:hover {
   box-shadow: 0 20px 50px var(--glass-shadow);
   width: 100%;
   transition: box-shadow 0.5s ease;
-  animation: fadeInUp 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.7s forwards;
+  /* animation: fadeInUp disabled */
 }
 
 .prayer-card:hover {

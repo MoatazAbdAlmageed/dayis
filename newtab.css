@@ -8,7 +8,13 @@
   --glass-shadow: rgba(0, 0, 0, 0.3);
 
   /* Majestic Emerald - Default Theme Variable Set */
-  --bg-gradient: linear-gradient(135deg, #03140e 0%, #08261a 35%, #0f402c 70%, #1c6647 100%);
+  --bg-gradient: linear-gradient(
+    135deg,
+    #03140e 0%,
+    #08261a 35%,
+    #0f402c 70%,
+    #1c6647 100%
+  );
   --overlay-color-1: rgba(223, 183, 108, 0.22);
   --overlay-color-2: rgba(15, 64, 44, 0.5);
   --panel-bg: rgba(11, 37, 26, 0.85);
@@ -17,7 +23,13 @@
 
 /* Background Theme Definitions */
 body.theme-emerald {
-  --bg-gradient: linear-gradient(135deg, #03140e 0%, #08261a 35%, #0f402c 70%, #1c6647 100%);
+  --bg-gradient: linear-gradient(
+    135deg,
+    #03140e 0%,
+    #08261a 35%,
+    #0f402c 70%,
+    #1c6647 100%
+  );
   --overlay-color-1: rgba(223, 183, 108, 0.22);
   --overlay-color-2: rgba(15, 64, 44, 0.5);
   --panel-bg: rgba(11, 37, 26, 0.85);
@@ -25,7 +37,13 @@ body.theme-emerald {
 }
 
 body.theme-indigo {
-  --bg-gradient: linear-gradient(135deg, #020b14 0%, #061726 35%, #0c263c 70%, #173b5a 100%);
+  --bg-gradient: linear-gradient(
+    135deg,
+    #020b14 0%,
+    #061726 35%,
+    #0c263c 70%,
+    #173b5a 100%
+  );
   --overlay-color-1: rgba(223, 183, 108, 0.22);
   --overlay-color-2: rgba(23, 59, 90, 0.5);
   --panel-bg: rgba(6, 23, 38, 0.85);
@@ -33,7 +51,13 @@ body.theme-indigo {
 }
 
 body.theme-crimson {
-  --bg-gradient: linear-gradient(135deg, #1f0308 0%, #3a0812 35%, #59101e 70%, #801d30 100%);
+  --bg-gradient: linear-gradient(
+    135deg,
+    #1f0308 0%,
+    #3a0812 35%,
+    #59101e 70%,
+    #801d30 100%
+  );
   --overlay-color-1: rgba(223, 183, 108, 0.22);
   --overlay-color-2: rgba(89, 16, 30, 0.5);
   --panel-bg: rgba(58, 8, 18, 0.85);
@@ -41,7 +65,13 @@ body.theme-crimson {
 }
 
 body.theme-obsidian {
-  --bg-gradient: linear-gradient(135deg, #0a0a0a 0%, #141414 35%, #212121 70%, #2d2d2d 100%);
+  --bg-gradient: linear-gradient(
+    135deg,
+    #0a0a0a 0%,
+    #141414 35%,
+    #212121 70%,
+    #2d2d2d 100%
+  );
   --overlay-color-1: rgba(223, 183, 108, 0.25);
   --overlay-color-2: rgba(45, 45, 45, 0.5);
   --panel-bg: rgba(20, 20, 20, 0.9);
@@ -49,7 +79,13 @@ body.theme-obsidian {
 }
 
 body.theme-purple {
-  --bg-gradient: linear-gradient(135deg, #181423 0%, #2f2540 35%, #4a3c63 70%, #6a5b8b 100%);
+  --bg-gradient: linear-gradient(
+    135deg,
+    #181423 0%,
+    #2f2540 35%,
+    #4a3c63 70%,
+    #6a5b8b 100%
+  );
   --overlay-color-1: rgba(223, 183, 108, 0.22);
   --overlay-color-2: rgba(74, 60, 99, 0.5);
   --panel-bg: rgba(47, 37, 64, 0.85);
@@ -63,7 +99,7 @@ body.theme-purple {
 }
 
 body {
-  font-family: 'Outfit', 'Cairo', sans-serif;
+  font-family: "Outfit", "Cairo", sans-serif;
   background: var(--bg-gradient);
   color: var(--text-primary);
   height: 100vh;
@@ -101,11 +137,22 @@ body::-webkit-scrollbar-thumb:hover {
   left: 0;
   width: 100%;
   height: 100%;
-  background: 
-    radial-gradient(circle at 85% 15%, var(--overlay-color-1) 0%, transparent 55%),
-    radial-gradient(circle at 15% 85%, var(--overlay-color-2) 0%, transparent 60%),
+  background:
+    radial-gradient(
+      circle at 85% 15%,
+      var(--overlay-color-1) 0%,
+      transparent 55%
+    ),
+    radial-gradient(
+      circle at 15% 85%,
+      var(--overlay-color-2) 0%,
+      transparent 60%
+    ),
     url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60' viewBox='0 0 60 60'%3E%3Cpath d='M30 0 L40 10 H50 V20 L60 30 L50 40 V50 H40 L30 60 L20 50 H10 V40 L0 30 L10 20 V10 H20 Z' fill='none' stroke='%23dfb76c' stroke-width='0.75' stroke-opacity='0.05'/%3E%3Ccircle cx='30' cy='30' r='7' fill='none' stroke='%23dfb76c' stroke-width='0.75' stroke-opacity='0.04'/%3E%3C/svg%3E");
-  background-size: cover, cover, 60px 60px;
+  background-size:
+    cover,
+    cover,
+    60px 60px;
   z-index: 1;
   transition: background 0.8s cubic-bezier(0.16, 1, 0.3, 1);
 }
@@ -115,8 +162,8 @@ body::-webkit-scrollbar-thumb:hover {
   z-index: 2;
   display: grid;
   grid-template-columns: repeat(4, 1fr); /* Four equal columns */
-  grid-template-rows: repeat(2, 1fr);   /* Two equal rows — fill height evenly */
-  grid-auto-flow: column;               /* Fill column first, then move right */
+  grid-template-rows: repeat(2, 1fr); /* Two equal rows — fill height evenly */
+  grid-auto-flow: column; /* Fill column first, then move right */
   gap: 0.8rem;
   padding: 0.8rem 1rem;
   max-width: 1750px;
@@ -124,7 +171,7 @@ body::-webkit-scrollbar-thumb:hover {
   height: 100vh;
   max-height: 100vh;
   box-sizing: border-box;
-  align-items: stretch;   /* Cards stretch to fill their row cell */
+  align-items: stretch; /* Cards stretch to fill their row cell */
   justify-content: start; /* Align columns to the left */
   animation: fadeInUp 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
@@ -140,7 +187,7 @@ body::-webkit-scrollbar-thumb:hover {
   display: flex;
   flex-direction: column;
   justify-content: center; /* vertical centre */
-  align-items: center;     /* horizontal centre */
+  align-items: center; /* horizontal centre */
   text-align: center;
 }
 
@@ -156,7 +203,9 @@ body::-webkit-scrollbar-thumb:hover {
 }
 
 .date-card:hover {
-  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.4), 0 0 15px rgba(223, 183, 108, 0.1);
+  box-shadow:
+    0 25px 60px rgba(0, 0, 0, 0.4),
+    0 0 15px rgba(223, 183, 108, 0.1);
 }
 
 .card-header-row {
@@ -191,7 +240,9 @@ body::-webkit-scrollbar-thumb:hover {
   padding: 0.4rem 0.9rem;
   border-radius: 50px;
   cursor: help;
-  transition: border-color 0.3s ease, background 0.3s ease;
+  transition:
+    border-color 0.3s ease,
+    background 0.3s ease;
 }
 
 .weather-widget:hover {
@@ -251,11 +302,15 @@ body::-webkit-scrollbar-thumb:hover {
   border-radius: 50%;
   position: relative;
   background: rgba(255, 255, 255, 0.02);
-  box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.2), 0 10px 30px var(--glass-shadow);
+  box-shadow:
+    inset 0 0 20px rgba(0, 0, 0, 0.2),
+    0 10px 30px var(--glass-shadow);
   display: flex;
   justify-content: center;
   align-items: center;
-  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease;
+  transition:
+    transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 0.3s ease;
 }
 
 .analog-clock:hover {
@@ -345,7 +400,7 @@ body::-webkit-scrollbar-thumb:hover {
 }
 
 .date-display-ar {
-  font-family: 'Cairo', sans-serif;
+  font-family: "Cairo", sans-serif;
   font-size: 0.95rem;
   font-weight: 600;
   line-height: 1.3;
@@ -379,7 +434,9 @@ body::-webkit-scrollbar-thumb:hover {
   border: 1px solid var(--glass-border);
   padding: 0.4rem 0.5rem;
   border-radius: 10px;
-  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), background 0.3s ease;
+  transition:
+    transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+    background 0.3s ease;
 }
 
 .clock-item:hover {
@@ -407,8 +464,8 @@ body::-webkit-scrollbar-thumb:hover {
 /* Animations */
 @keyframes fadeInUp {
   from {
-    opacity: 0;
-    transform: translateY(30px);
+    opacity: 1;
+    transform: translateY(0);
   }
   to {
     opacity: 1;
@@ -472,8 +529,11 @@ body::-webkit-scrollbar-thumb:hover {
   justify-content: center;
   align-items: center;
   backdrop-filter: blur(10px);
-  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), background 0.3s, border-color 0.3s;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  transition:
+    transform 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+    background 0.3s,
+    border-color 0.3s;
 }
 
 .settings-toggle:hover {
@@ -497,10 +557,15 @@ body::-webkit-scrollbar-thumb:hover {
   padding: 2rem;
   z-index: 1000;
   backdrop-filter: blur(25px);
-  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6), 0 0 0 100vw rgba(0, 0, 0, 0.5); /* Modal Backdrop overlay */
+  box-shadow:
+    0 30px 60px rgba(0, 0, 0, 0.6),
+    0 0 0 100vw rgba(0, 0, 0, 0.5); /* Modal Backdrop overlay */
   opacity: 0;
   pointer-events: none;
-  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease, background 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  transition:
+    transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+    opacity 0.4s ease,
+    background 0.8s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .settings-panel.active {
@@ -574,7 +639,9 @@ body::-webkit-scrollbar-thumb:hover {
   font-size: 0.9rem;
   outline: none;
   cursor: pointer;
-  transition: border-color 0.3s ease, background-color 0.3s ease;
+  transition:
+    border-color 0.3s ease,
+    background-color 0.3s ease;
 }
 
 .settings-group select:focus {
@@ -598,7 +665,10 @@ body::-webkit-scrollbar-thumb:hover {
   font-weight: 600;
   font-size: 0.95rem;
   cursor: pointer;
-  transition: transform 0.2s, box-shadow 0.2s, opacity 0.2s;
+  transition:
+    transform 0.2s,
+    box-shadow 0.2s,
+    opacity 0.2s;
   font-family: inherit;
   box-shadow: 0 4px 15px rgba(223, 183, 108, 0.2);
 }
@@ -624,7 +694,7 @@ body::-webkit-scrollbar-thumb:hover {
   margin-top: 0;
   width: 100%;
   transition: box-shadow 0.5s ease;
-  animation: fadeInUp 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.2s forwards;
+  /* animation: fadeInUp 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.2s forwards; */
 }
 
 /* Inner todo elements: stretch full width, left-align text */
@@ -636,7 +706,9 @@ body::-webkit-scrollbar-thumb:hover {
 }
 
 .todo-card:hover {
-  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.4), 0 0 15px rgba(223, 183, 108, 0.05);
+  box-shadow:
+    0 25px 60px rgba(0, 0, 0, 0.4),
+    0 0 15px rgba(223, 183, 108, 0.05);
 }
 
 .column-1,
@@ -664,7 +736,9 @@ body::-webkit-scrollbar-thumb:hover {
 }
 
 .focus-card:hover {
-  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.4), 0 0 15px rgba(223, 183, 108, 0.05);
+  box-shadow:
+    0 25px 60px rgba(0, 0, 0, 0.4),
+    0 0 15px rgba(223, 183, 108, 0.05);
 }
 
 .todo-header {
@@ -706,7 +780,9 @@ body::-webkit-scrollbar-thumb:hover {
   font-family: inherit;
   font-size: 0.8rem;
   outline: none;
-  transition: border-color 0.3s, background-color 0.3s;
+  transition:
+    border-color 0.3s,
+    background-color 0.3s;
 }
 
 .todo-input:focus {
@@ -727,7 +803,9 @@ body::-webkit-scrollbar-thumb:hover {
   display: flex;
   justify-content: center;
   align-items: center;
-  transition: transform 0.2s, box-shadow 0.2s;
+  transition:
+    transform 0.2s,
+    box-shadow 0.2s;
   box-shadow: 0 4px 10px rgba(223, 183, 108, 0.2);
 }
 
@@ -776,7 +854,9 @@ body::-webkit-scrollbar-thumb:hover {
   border: 1px solid var(--glass-border);
   border-radius: 8px;
   padding: 0.35rem 0.6rem;
-  transition: background 0.2s, border-color 0.2s;
+  transition:
+    background 0.2s,
+    border-color 0.2s;
 }
 
 .todo-item:hover {
@@ -791,7 +871,9 @@ body::-webkit-scrollbar-thumb:hover {
   border-radius: 50%;
   cursor: pointer;
   position: relative;
-  transition: border-color 0.2s, background-color 0.2s;
+  transition:
+    border-color 0.2s,
+    background-color 0.2s;
   flex-shrink: 0;
 }
 
@@ -805,7 +887,7 @@ body::-webkit-scrollbar-thumb:hover {
 }
 
 .todo-item.completed .todo-checkbox::after {
-  content: '';
+  content: "";
   position: absolute;
   top: 2px;
   left: 5px;
@@ -822,7 +904,9 @@ body::-webkit-scrollbar-thumb:hover {
   font-weight: 300;
   color: var(--text-primary);
   cursor: pointer;
-  transition: color 0.2s, text-decoration 0.2s;
+  transition:
+    color 0.2s,
+    text-decoration 0.2s;
   word-break: break-word;
 }
 
@@ -1085,7 +1169,9 @@ body::-webkit-scrollbar-thumb:hover {
   border-radius: 50%;
   cursor: pointer;
   position: relative;
-  transition: border-color 0.2s, background-color 0.2s;
+  transition:
+    border-color 0.2s,
+    background-color 0.2s;
   flex-shrink: 0;
 }
 
@@ -1099,7 +1185,7 @@ body::-webkit-scrollbar-thumb:hover {
 }
 
 .focus-check.completed::after {
-  content: '';
+  content: "";
   position: absolute;
   top: 3px;
   left: 6px;
@@ -1115,7 +1201,9 @@ body::-webkit-scrollbar-thumb:hover {
   font-weight: 400;
   color: #ffffff;
   word-break: break-word;
-  transition: color 0.2s, text-decoration 0.2s;
+  transition:
+    color 0.2s,
+    text-decoration 0.2s;
 }
 
 .focus-text-display.completed {
@@ -1131,7 +1219,9 @@ body::-webkit-scrollbar-thumb:hover {
   font-size: 1.1rem;
   cursor: pointer;
   opacity: 0;
-  transition: opacity 0.2s, color 0.2s;
+  transition:
+    opacity 0.2s,
+    color 0.2s;
   padding: 0.4rem;
 }
 
@@ -1158,7 +1248,9 @@ body::-webkit-scrollbar-thumb:hover {
 }
 
 .radio-card:hover {
-  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.4), 0 0 15px rgba(223, 183, 108, 0.05);
+  box-shadow:
+    0 25px 60px rgba(0, 0, 0, 0.4),
+    0 0 15px rgba(223, 183, 108, 0.05);
 }
 
 .radio-header {
@@ -1186,7 +1278,9 @@ body::-webkit-scrollbar-thumb:hover {
   height: 6px;
   background-color: #e05e5e;
   border-radius: 50%;
-  transition: background-color 0.3s, box-shadow 0.3s;
+  transition:
+    background-color 0.3s,
+    box-shadow 0.3s;
 }
 
 .live-dot.playing {
@@ -1206,7 +1300,7 @@ body::-webkit-scrollbar-thumb:hover {
   font-size: 0.9rem;
   font-weight: 600;
   color: #ffffff;
-  font-family: 'Outfit', 'Cairo', sans-serif;
+  font-family: "Outfit", "Cairo", sans-serif;
   letter-spacing: 0.01em;
 }
 
@@ -1214,7 +1308,7 @@ body::-webkit-scrollbar-thumb:hover {
   font-size: 0.7rem;
   font-weight: 300;
   color: var(--text-secondary);
-  font-family: 'Outfit', 'Cairo', sans-serif;
+  font-family: "Outfit", "Cairo", sans-serif;
 }
 
 .radio-controls {
@@ -1234,8 +1328,11 @@ body::-webkit-scrollbar-thumb:hover {
   display: flex;
   justify-content: center;
   align-items: center;
-  transition: transform 0.2s, background-color 0.2s, border-color 0.2s;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  transition:
+    transform 0.2s,
+    background-color 0.2s,
+    border-color 0.2s;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   outline: none;
 }
 
@@ -1392,7 +1489,9 @@ body::-webkit-scrollbar-thumb:hover {
 }
 
 .weather-forecast-card:hover {
-  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.4), 0 0 15px rgba(223, 183, 108, 0.05);
+  box-shadow:
+    0 25px 60px rgba(0, 0, 0, 0.4),
+    0 0 15px rgba(223, 183, 108, 0.05);
 }
 
 .forecast-header {
@@ -1425,7 +1524,9 @@ body::-webkit-scrollbar-thumb:hover {
   background-color: rgba(255, 255, 255, 0.01);
   border: 1px solid var(--glass-border);
   border-radius: 10px;
-  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.3s ease;
+  transition:
+    transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+    background-color 0.3s ease;
 }
 
 .forecast-item:hover {
@@ -1438,7 +1539,7 @@ body::-webkit-scrollbar-thumb:hover {
   font-size: 0.85rem;
   font-weight: 500;
   color: var(--text-primary);
-  font-family: 'Outfit', 'Cairo', sans-serif;
+  font-family: "Outfit", "Cairo", sans-serif;
   text-align: center;
 }
 
@@ -1452,7 +1553,7 @@ body::-webkit-scrollbar-thumb:hover {
   font-size: 0.72rem;
   font-weight: 300;
   color: var(--text-secondary);
-  font-family: 'Outfit', 'Cairo', sans-serif;
+  font-family: "Outfit", "Cairo", sans-serif;
   text-align: center;
 }
 
@@ -1517,7 +1618,9 @@ body::-webkit-scrollbar-thumb:hover {
 }
 
 .favsites-card:hover {
-  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.4), 0 0 15px rgba(223, 183, 108, 0.05);
+  box-shadow:
+    0 25px 60px rgba(0, 0, 0, 0.4),
+    0 0 15px rgba(223, 183, 108, 0.05);
 }
 
 /* Inner favsites elements: full-width, left-aligned */
@@ -1555,7 +1658,10 @@ body::-webkit-scrollbar-thumb:hover {
   border-radius: 10px;
   padding: 0.4rem 0.7rem;
   text-decoration: none;
-  transition: background 0.3s, border-color 0.3s, transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  transition:
+    background 0.3s,
+    border-color 0.3s,
+    transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .favsite-item:hover {
@@ -1612,7 +1718,9 @@ body::-webkit-scrollbar-thumb:hover {
 }
 
 .prayer-card:hover {
-  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.4), 0 0 15px rgba(223, 183, 108, 0.05);
+  box-shadow:
+    0 25px 60px rgba(0, 0, 0, 0.4),
+    0 0 15px rgba(223, 183, 108, 0.05);
 }
 
 .prayer-header,
